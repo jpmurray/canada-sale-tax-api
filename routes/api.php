@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\File;
 
 Route::group(['prefix' => '/v1'], function () {
 
-    Route::group(['prefix' => '/fed'], function () {
+    Route::group(['prefix' => '/federal'], function () {
        Route::get('/gst', 'TaxesController@getGst');
        Route::get('/hst/{prov}', 'TaxesController@getHst');
        Route::get('/hst/all', 'TaxesController@getHst'); 
     });
 
-    Route::group(['prefix' => '/prov'], function () {
+    Route::group(['prefix' => '/provincial'], function () {
        Route::get('/pst/{province}', 'TaxesController@getPst');
        Route::get('/pst/all', 'TaxesController@getPst'); 
     });
