@@ -27,22 +27,26 @@ trait Rates {
      */
     public function getHstRate($province) {
         $hst = collect([
-            'ab' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'bc' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'mb' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nb' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nl' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'nt' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'ns' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'nu' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'on' => ['rate' => 0.13, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'pe' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'qc' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'sk' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'yt' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
         ]);
 
-        return ($province == "all" ? $hst : $hst->get($province));
+        $error = [
+            'error' => ['code' => 1000, 'message' => "There is no applicable HST in the {$province} region"]
+        ];
+
+        if($province == "all"){
+            return $hst;
+        }
+
+        if($hst->has($province)){
+            return $hst->get($province);
+        }else{
+            return $error;
+        }
     }
 
     /**
@@ -53,22 +57,30 @@ trait Rates {
     public function getPstRate($province) {
 
         $pst = collect([
-            'ab' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'bc' => ['rate' => 0.07, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'mb' => ['rate' => 0.08, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nb' => ['rate' => 0.10, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nl' => ['rate' => 0.10, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'nt' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'ns' => ['rate' => 0.10, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'nu' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'on' => ['rate' => 0.08, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'pe' => ['rate' => 0.09, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'qc' => ['rate' => 0.9975, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'sk' => ['rate' => 0.05, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'yt' => ['rate' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
         ]);
 
-        return ($province == "all" ? $pst : $pst->get($province));
+        $error = [
+            'error' => ['code' => 1000, 'message' => "There is no applicable PST in the {$province} region"]
+        ];
+
+        if($province == "all"){
+            return $pst;
+        }
+
+        if($pst->has($province)){
+            return $pst->get($province);
+        }else{
+            return $error;
+        }
     }
 
     /**

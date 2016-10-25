@@ -14,6 +14,12 @@ class TaxesController extends Controller {
     }
 
     public function getHst($province) {
+        $hst = $this->getHstRate($province);
+        
+        if(array_key_exists('error', $hst)){
+            return response($hst, 404);
+        }
+
         return response()->json(
             $this->getHstRate($province)
         );
@@ -21,8 +27,12 @@ class TaxesController extends Controller {
 
     public function getPst($province)
     {
+        if(array_key_exists('error', $hst)){
+            return response($hst, 404);
+        }
+
         return response()->json(
-            $this->getPstRate($province)
+            $this->getHstRate($province)
         );
     }
 
