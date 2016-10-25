@@ -30,9 +30,9 @@ URL to poll the API is `http://api.canadasalestaxapi.ca`.
 
 #### Get current GST
 
-`/v1/fed/gst`
+`/v1/federal/gst`
 
-##### Example response
+##### Example of successfull response
 
 ```
 {
@@ -42,10 +42,9 @@ URL to poll the API is `http://api.canadasalestaxapi.ca`.
 ```
 #### Get current HST for a province
 
-`/v1/fed/hst/:prov`
+`/v1/federal/hst/:prov`
 
-##### Example response
-Will return a rate of `null` if there is no applicable HST for a province.
+##### Example of successfull response
 
 ```
 {
@@ -54,36 +53,40 @@ Will return a rate of `null` if there is no applicable HST for a province.
 }
 ```
 
-#### Get current HST for all provinces
-
-`/v1/fed/hst/all`
-
-##### Example response
-Will return a rate of `null` if there is no applicable HST for a province.
+##### Example of unsuccessful response
+Will return 404 when there is no HST applicable to the province.
 
 ```
 {
-	"ab":{"rate":null,"last_modified":"2016-10-01"},
-	"bc":{"rate":null,"last_modified":"2016-10-01"},
-	"mb":{"rate":null,"last_modified":"2016-10-01"},
+	"error":{
+		"code":1000,
+		"message":"There is no applicable HST in the :prov region"
+	}
+}
+```
+
+#### Get current HST for all provinces
+
+`/v1/federal/hst/all`
+
+##### Example of successfull response
+If a :prov is not present in the response, it means that there is no HST applicable to :prov.
+
+```
+{
 	"nb":{"rate":0.15,"last_modified":"2016-10-01"},
 	"nl":{"rate":0.15,"last_modified":"2016-10-01"},
-	"nt":{"rate":null,"last_modified":"2016-10-01"},
 	"ns":{"rate":0.15,"last_modified":"2016-10-01"},
-	"nu":{"rate":null,"last_modified":"2016-10-01"},
 	"on":{"rate":0.13,"last_modified":"2016-10-01"},
 	"pe":{"rate":0.15,"last_modified":"2016-10-01"},
-	"qc":{"rate":null,"last_modified":"2016-10-01"},
-	"sk":{"rate":null,"last_modified":"2016-10-01"},
-	"yt":{"rate":null,"last_modified":"2016-10-01"}
 }
 ```
 
 #### Get current PST for a province
 
-`/v1/prov/pst/:prov`
+`/v1/provincial/pst/:prov`
 
-##### Example response
+##### Example of successfull response
 Will return a rate of `null` if there is no applicable HST for a province.
 
 ```
@@ -93,28 +96,36 @@ Will return a rate of `null` if there is no applicable HST for a province.
 }
 ```
 
-#### Get current PST for all provinces
-
-`/v1/prov/pst/all`
-
-##### Example response
-Will return a rate of `null` if there is no applicable HST for a province.
+##### Example of unsuccessful response
+Will return 404 when there is no PST applicable to the province.
 
 ```
 {
-	"ab":{"rate":null,"last_modified":"2016-10-01"},
+	"error":{
+		"code":1000,
+		"message":"There is no applicable PST in the :prov region"
+	}
+}
+```
+
+#### Get current PST for all provinces
+
+`/v1/provincial/pst/all`
+
+##### Example of successfull response
+If a :prov is not present in the response, it means that there is no HST applicable to :prov.
+
+```
+{
 	"bc":{"rate":0.07,"last_modified":"2016-10-01"},
 	"mb":{"rate":0.08,"last_modified":"2016-10-01"},
 	"nb":{"rate":0.1,"last_modified":"2016-10-01"},
 	"nl":{"rate":0.1,"last_modified":"2016-10-01"},
-	"nt":{"rate":null,"last_modified":"2016-10-01"},
 	"ns":{"rate":0.1,"last_modified":"2016-10-01"},
-	"nu":{"rate":null,"last_modified":"2016-10-01"},
 	"on":{"rate":0.08,"last_modified":"2016-10-01"},
 	"pe":{"rate":0.09,"last_modified":"2016-10-01"},
 	"qc":{"rate":0.9975,"last_modified":"2016-10-01"},
 	"sk":{"rate":0.05,"last_modified":"2016-10-01"},
-	"yt":{"rate":null,"last_modified":"2016-10-01"}
 }
 ```
 
@@ -122,7 +133,7 @@ Will return a rate of `null` if there is no applicable HST for a province.
 
 `/v1/total/:prov`
 
-##### Example response
+##### Example of successfull response
 
 ```
 {
@@ -136,7 +147,7 @@ Will return a rate of `null` if there is no applicable HST for a province.
 
 `/v1/total/all`
 
-##### Example response
+##### Example of successfull response
 
 ```
 {
