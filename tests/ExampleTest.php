@@ -1,20 +1,19 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A basic functional test example.
      *
      * @return void
      */
-    public function testExample()
+    public function testBasicExample()
     {
-        $this->get('/');
-
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
+        $this->visit('/')
+             ->see('Laravel');
     }
 }
