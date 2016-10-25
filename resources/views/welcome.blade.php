@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://salestaxapi.ca/docs">Documentation</a>
+                    <a href="http://salestaxapi.ca/">Documentation</a>
                     <a href="https://github.com/jpmurray/canada-sale-tax-api">GitHub</a>
                 </div>
             </div>
