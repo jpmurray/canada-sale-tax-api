@@ -26,7 +26,7 @@ The only parameter curently supported is `:prov` which is a [two letter canadian
 
 #### URL to poll
 
-URL to poll the API is `http://api.canadasalestaxapi.ca`.
+URL to poll the API is `http://api.salestaxapi.ca`.
 
 #### Get current GST
 
