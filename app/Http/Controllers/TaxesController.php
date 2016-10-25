@@ -20,20 +20,18 @@ class TaxesController extends Controller {
             return response($hst, 404);
         }
 
-        return response()->json(
-            $this->getHstRate($province)
-        );
+        return response()->json($hst);
     }
 
     public function getPst($province)
     {
-        if(array_key_exists('error', $hst)){
-            return response($hst, 404);
+        $pst = $this->getPstRate($province);
+
+        if(array_key_exists('error', $pst)){
+            return response($pst, 404);
         }
 
-        return response()->json(
-            $this->getHstRate($province)
-        );
+        return response()->json($pst);
     }
 
     public function getTotal($province)

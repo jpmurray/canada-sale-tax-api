@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 3.0.1 (2016-10-25)
+- Fixes a stupid code 18.
+
 ## 3.0.0 (2016-10-25)
 - If an entity doesn't exists, it will either returns 404 or won't exists in array if requesting `all`;
 - Routes now uses "provinces" and "federal" rather than "prov" and "fed".
