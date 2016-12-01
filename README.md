@@ -169,4 +169,4 @@ If a :prov is not present in the response, it means that there is no HST applica
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Since it's built with Laravel, we use the same license: [MIT license](http://opensource.org/licenses/MIT).
