@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 3.0.2 (2017-02-01)
+- Changes effective PEI tax rate, as pointed out by @robert-waggott in #4.
+
 ## 3.0.1 (2016-10-25)
 - Fixes a stupid code 18.
 
