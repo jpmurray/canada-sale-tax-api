@@ -4,13 +4,15 @@ namespace App\Traits;
 
 use Carbon\Carbon;
 
-trait Rates {
+trait Rates
+{
 
     /**
      * Return the GST amount
      * @return array           Array containing the requested information
      */
-    public function getGstRate() {
+    public function getGstRate()
+    {
         $last_modified = Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto');
         $rate = 0.05;
 
@@ -25,26 +27,27 @@ trait Rates {
      * @param  str $province A two letter representation of the province, or "all"
      * @return array           Array containing the requested information
      */
-    public function getHstRate($province) {
+    public function getHstRate($province)
+    {
         $hst = collect([
             'nb' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nl' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'ns' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'on' => ['rate' => 0.13, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'pe' => ['rate' => 0.15, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
+            'pe' => ['rate' => 0.15, 'last_modified' => Carbon::create(2017, 2, 1, 14, 21, 0, 'America/Toronto')->toDateString()],
         ]);
 
         $error = [
             'error' => ['code' => 1000, 'message' => "There is no applicable HST in the {$province} region"]
         ];
 
-        if($province == "all"){
+        if ($province == "all") {
             return $hst;
         }
 
-        if($hst->has($province)){
+        if ($hst->has($province)) {
             return $hst->get($province);
-        }else{
+        } else {
             return $error;
         }
     }
@@ -54,7 +57,8 @@ trait Rates {
      * @param  str $province A two letter representation of the province, or "all"
      * @return array           Array containing the requested information
      */
-    public function getPstRate($province) {
+    public function getPstRate($province)
+    {
 
         $pst = collect([
             'bc' => ['rate' => 0.07, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
@@ -63,7 +67,7 @@ trait Rates {
             'nl' => ['rate' => 0.10, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'ns' => ['rate' => 0.10, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'on' => ['rate' => 0.08, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'pe' => ['rate' => 0.09, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
+            'pe' => ['rate' => 0.10, 'last_modified' => Carbon::create(2017, 2, 1, 14, 21, 0, 'America/Toronto')->toDateString()],
             'qc' => ['rate' => 0.9975, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'sk' => ['rate' => 0.05, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
         ]);
@@ -72,13 +76,13 @@ trait Rates {
             'error' => ['code' => 1000, 'message' => "There is no applicable PST in the {$province} region"]
         ];
 
-        if($province == "all"){
+        if ($province == "all") {
             return $pst;
         }
 
-        if($pst->has($province)){
+        if ($pst->has($province)) {
             return $pst->get($province);
-        }else{
+        } else {
             return $error;
         }
     }
@@ -88,7 +92,8 @@ trait Rates {
      * @param  str $province A two letter representation of the province, or "all"
      * @return array           Array containing the requested information
      */
-    public function getTotalRate($province) {
+    public function getTotalRate($province)
+    {
 
         $total = collect([
             'ab' => ['rate' => 0.05, 'type' => 'GST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
@@ -100,7 +105,7 @@ trait Rates {
             'ns' => ['rate' => 0.15, 'type' => 'HST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'nu' => ['rate' => 0.05, 'type' => null, 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'on' => ['rate' => 0.13, 'type' => 'HST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
-            'pe' => ['rate' => 0.14, 'type' => 'HST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
+            'pe' => ['rate' => 0.15, 'type' => 'HST', 'last_modified' => Carbon::create(2017, 2, 1, 14, 21, 0, 'America/Toronto')->toDateString()],
             'qc' => ['rate' => 0.14975, 'type' => 'GST+PST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'sk' => ['rate' => 0.10, 'type' => 'GST+PST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
             'yt' => ['rate' => 0.05, 'type' => 'GST', 'last_modified' => Carbon::create(2016, 10, 1, 0, 0, 0, 'America/Toronto')->toDateString()],
