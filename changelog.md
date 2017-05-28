@@ -2,6 +2,10 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 3.1.0 (2017-05-28)
+- Upgraded to Laravel 5.4
+- Passage to database based rates
+
 ## 3.0.2 (2017-02-01)
 - Changes effective PEI tax rate, as pointed out by @robert-waggott in #4.
 
