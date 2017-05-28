@@ -12,9 +12,11 @@ class RatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($province)
     {
-        //
+        $rates = Rates::where('province', $province)->orderBy('start', 'DESC')->get();
+        
+        return view('rates')->with(['rates' => $rates]);
     }
 
     /**
@@ -24,7 +26,7 @@ class RatesController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -33,9 +35,22 @@ class RatesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validate(request(), [
+            'province' => 'required',
+            'pst' => 'numeric',
+            'gst' => 'numeric',
+            'hst' => 'numeric',
+            'applicable' => 'numeric|required',
+            'type' => 'required',
+            'start' => 'date|required',
+            'source' => 'required',
+        ]);
+
+        $rate = Rates::create(request()->only(['province', 'pst', 'gst', 'hst', 'applicable', 'type', 'start', 'source']));
+
+        return redirect()->route('rates.edit', ['id' => $rate->id]);
     }
 
     /**
@@ -44,7 +59,7 @@ class RatesController extends Controller
      * @param  \App\Rates  $rates
      * @return \Illuminate\Http\Response
      */
-    public function show(Rates $rates)
+    public function show(Rates $rate)
     {
         //
     }
@@ -55,9 +70,9 @@ class RatesController extends Controller
      * @param  \App\Rates  $rates
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rates $rates)
+    public function edit(Rates $rate)
     {
-        //
+        return view('edit')->with(['rate' => $rate]);
     }
 
     /**
@@ -67,9 +82,22 @@ class RatesController extends Controller
      * @param  \App\Rates  $rates
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rates $rates)
+    public function update(Rates $rate)
     {
-        //
+        $this->validate(request(), [
+            'province' => 'required',
+            'pst' => 'numeric',
+            'gst' => 'numeric',
+            'hst' => 'numeric',
+            'applicable' => 'numeric|required',
+            'type' => 'required',
+            'start' => 'date|required',
+            'source' => 'required',
+        ]);
+
+        $rate->update(request()->only(['province', 'pst', 'gst', 'hst', 'applicable', 'type', 'start', 'source']));
+
+        return back();
     }
 
     /**
@@ -78,7 +106,7 @@ class RatesController extends Controller
      * @param  \App\Rates  $rates
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rates $rates)
+    public function destroy(Rates $rate)
     {
         //
     }
