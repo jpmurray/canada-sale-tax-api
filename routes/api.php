@@ -17,17 +17,16 @@ use Illuminate\Support\Facades\File;
 Route::group(['prefix' => '/v1'], function () {
 
     Route::group(['prefix' => '/federal'], function () {
-       Route::get('/gst', 'TaxesController@getGst');
-       Route::get('/hst/{prov}', 'TaxesController@getHst');
-       Route::get('/hst/all', 'TaxesController@getHst'); 
+        Route::get('/gst', 'RatesAPIV1Controller@getGst');
+        Route::get('/hst/{prov}', 'RatesAPIV1Controller@getHst');
+        Route::get('/hst/all', 'RatesAPIV1Controller@getHst');
     });
 
     Route::group(['prefix' => '/provincial'], function () {
-       Route::get('/pst/{province}', 'TaxesController@getPst');
-       Route::get('/pst/all', 'TaxesController@getPst'); 
+        Route::get('/pst/{province}', 'RatesAPIV1Controller@getPst');
+        Route::get('/pst/all', 'RatesAPIV1Controller@getPst');
     });
 
-    Route::get('/total/{province}', 'TaxesController@getTotal');
-    Route::get('/total/all', 'TaxesController@getTotal');
-    
+    Route::get('/total/{province}', 'RatesAPIV1Controller@getTotal');
+    Route::get('/total/all', 'RatesAPIV1Controller@getTotal');
 });

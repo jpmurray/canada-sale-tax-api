@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Rates;
-use App\Traits\Rates as RatesTrait;
 
-class TaxesController extends Controller
+class RatesAPIV1Controller extends Controller
 {
-    use RatesTrait;
 
     public function getGst()
     {
