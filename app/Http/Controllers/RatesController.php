@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rates;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class RatesController extends Controller
@@ -66,6 +67,8 @@ class RatesController extends Controller
 
         $rate = Rates::create(request()->only(['province', 'pst', 'gst', 'hst', 'applicable', 'type', 'start', 'source']));
 
+        Cache::flush();
+
         return redirect()->route('rates.edit', ['id' => $rate->id]);
     }
 
@@ -117,6 +120,8 @@ class RatesController extends Controller
 
         $rate->update(request()->only(['province', 'pst', 'gst', 'hst', 'applicable', 'type', 'start', 'source']));
 
+        Cache::flush();
+        
         return back();
     }
 
