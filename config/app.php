@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravel\Tinker\TinkerServiceProvider::class,
         Laracademy\Commands\MakeServiceProvider::class,
 
         //
