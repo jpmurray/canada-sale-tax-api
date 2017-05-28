@@ -15,6 +15,12 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('province'); // province abbreviation
+            $table->float('pst', 6, 5)->nullable(); // pst, if applicable
+            $table->float('hst', 6, 5)->nullable(); // hst, if applicable
+            $table->float('gst', 6, 5)->nullable(); // gst rate
+            $table->float('applicable', 6, 5); // applicable tax rate
+            $table->string('type'); // type of applicable tax rate, ie: GST+PST
             $table->timestamps();
         });
     }
