@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class RatesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +20,10 @@ class RatesController extends Controller
     public function index($province)
     {
         $rates = Rates::where('province', $province)->orderBy('start', 'DESC')->get();
+
+        if ($rates->count() == 0) {
+            abort(404, "No entries for this province. You should add at least one.");
+        }
         
         return view('rates')->with(['rates' => $rates]);
     }

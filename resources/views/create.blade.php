@@ -16,6 +16,7 @@
 
                             <div class="col-md-6">
                                 <select name="province" class="form-control">
+                                    <option value="all">All (Federal tax)</option>
                                     <option value="ab">Alberta</option>
                                     <option value="bc">British-Coloumbia</option>
                                     <option value="mb">Manitoba</option>

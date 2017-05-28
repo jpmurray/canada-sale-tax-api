@@ -17,6 +17,7 @@
 
                             <div class="col-md-6">
                                 <select name="province" class="form-control">
+                                    <option value="all" @if($rate->province == "all") SELECTED @endif>All (Federal tax)</option>
                                     <option value="ab" @if($rate->province == "ab") SELECTED @endif>Alberta</option>
                                     <option value="bc" @if($rate->province == "bc") SELECTED @endif>British-Coloumbia</option>
                                     <option value="mb" @if($rate->province == "mb") SELECTED @endif>Manitoba</option>

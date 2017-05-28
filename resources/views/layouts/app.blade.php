@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -36,8 +36,29 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Rates <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route('rates.index', ['province' => 'all']) }}">Federal</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'ab']) }}">Alberta</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'bc']) }}">British-Columbia</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'mb']) }}">Manitoba</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'nb']) }}">New-Brunswick</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'nl']) }}">Newfoundland and Labrador</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'nt']) }}">Northwest Territories</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'nu']) }}">Nunavut</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'on']) }}">Ontario</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'pe']) }}">Prince Edward Island</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'qc']) }}">Quebec</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'sk']) }}">Saskatchewan</a></li>
+                                <li><a href="{{ route('rates.index', ['province' => 'yt']) }}">Yukon</a></li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ route('rates.create') }}">Add a rate</a></li>
+                    </ul>   
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
