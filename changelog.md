@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## Next
+- API V2, a lot has changed. See readme for current usage.
+
 ## 3.2.0 (2017-05-28)
 - Now caching response for 24h and invalidate cache on store or update or a rate.
 
