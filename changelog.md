@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## Next version
+- Upgraded to Laravel 5.4
+
 ## 3.0.2 (2017-02-01)
 - Changes effective PEI tax rate, as pointed out by @robert-waggott in #4.
 
