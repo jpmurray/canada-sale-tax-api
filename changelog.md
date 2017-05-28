@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 3.2.0 (2017-05-28)
+- Now caching response for 24h and invalidate cache on store or update or a rate.
+
 ## 3.1.0 (2017-05-28)
 - Upgraded to Laravel 5.4
 - Passage to database based rates
