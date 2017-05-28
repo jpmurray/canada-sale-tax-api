@@ -16,6 +16,15 @@ class Rates extends Model
         'province', 'pst', 'hst', 'gst', 'applicable', 'type', 'start', 'source',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id', 'created_at',
+    ];
+
      /**
      * The attributes that should be cast to native types.
      *
