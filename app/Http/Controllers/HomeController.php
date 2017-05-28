@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('do-anything')) {
+            abort(401, "I'm sorry Dave, I'm afraid I cannot let you do that.");
+        }
+        
         return view('home');
     }
 }

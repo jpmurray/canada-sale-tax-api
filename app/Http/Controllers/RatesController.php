@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rates;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RatesController extends Controller
 {
@@ -19,6 +20,8 @@ class RatesController extends Controller
      */
     public function index($province)
     {
+        $this->authAdmin();
+
         $rates = Rates::where('province', $province)->orderBy('start', 'DESC')->get();
 
         if ($rates->count() == 0) {
@@ -35,6 +38,8 @@ class RatesController extends Controller
      */
     public function create()
     {
+        $this->authAdmin();
+
         return view('create');
     }
 
@@ -46,6 +51,8 @@ class RatesController extends Controller
      */
     public function store()
     {
+        $this->authAdmin();
+
         $this->validate(request(), [
             'province' => 'required',
             'pst' => 'numeric',
@@ -81,6 +88,8 @@ class RatesController extends Controller
      */
     public function edit(Rates $rate)
     {
+        $this->authAdmin();
+
         return view('edit')->with(['rate' => $rate]);
     }
 
@@ -93,6 +102,8 @@ class RatesController extends Controller
      */
     public function update(Rates $rate)
     {
+        $this->authAdmin();
+        
         $this->validate(request(), [
             'province' => 'required',
             'pst' => 'numeric',
@@ -118,5 +129,12 @@ class RatesController extends Controller
     public function destroy(Rates $rate)
     {
         //
+    }
+
+    public function authAdmin()
+    {
+        if (Gate::denies('do-anything')) {
+            abort(401, "I'm sorry Dave, I'm afraid I cannot let you do that.");
+        }
     }
 }
