@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Laracademy\Commands\MakeServiceProvider::class,
 
         //
 
