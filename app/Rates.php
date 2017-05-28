@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rates extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'province', 'pst', 'hst', 'gst', 'applicable', 'type',
+        'province', 'pst', 'hst', 'gst', 'applicable', 'type', 'start', 'source',
     ];
 
      /**
@@ -25,5 +26,6 @@ class Rates extends Model
         'hst' => 'float',
         'gst' => 'float',
         'applicable' => 'float',
+        'since' => 'datetime'
     ];
 }

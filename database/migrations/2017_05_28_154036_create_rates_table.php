@@ -21,6 +21,8 @@ class CreateRatesTable extends Migration
             $table->float('gst', 6, 5)->nullable(); // gst rate
             $table->float('applicable', 6, 5); // applicable tax rate
             $table->string('type'); // type of applicable tax rate, ie: GST+PST
+            $table->datetime('start'); // when did that date start
+            $table->text('source'); // What is the source of the information
             $table->timestamps();
         });
     }
