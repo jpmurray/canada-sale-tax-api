@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\IncrementStats;
 use App\Rates;
 use Illuminate\Support\Facades\Cache;
 
 class RatesAPIV1Controller extends Controller
 {
+
+    public function __construct()
+    {
+        dispatch(new IncrementStats(request()->path()));
+    }
 
     public function getGst()
     {

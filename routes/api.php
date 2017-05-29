@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\File;
 |
  */
 
+Route::group(['prefix' => '/v2'], function () {
+
+    Route::group(['prefix' => '/federal'], function () {
+        Route::get('/gst/historical', 'RatesAPIV2Controller@getHistoricalGst');
+        Route::get('/gst/future', 'RatesAPIV2Controller@getFutureGst');
+        Route::get('/gst', 'RatesAPIV2Controller@getCurrentGst');
+    });
+
+    Route::group(['prefix' => '/province'], function () {
+        Route::get('/{province}/historical', 'RatesAPIV2Controller@getHistoricalPst');
+        Route::get('/{province}/future', 'RatesAPIV2Controller@getFuturePst');
+        Route::get('/all', 'RatesAPIV2Controller@getAllPst');
+        Route::get('/{province}', 'RatesAPIV2Controller@getCurrentPst');
+    });
+});
+
 Route::group(['prefix' => '/v1'], function () {
 
     Route::group(['prefix' => '/federal'], function () {
