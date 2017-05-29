@@ -100,7 +100,7 @@ class RatesAPIV2Controller extends Controller
      */
     public function getCurrentPst($province)
     {
-        return Cache::remember('pst-current-rate', 1440, function () use ($province) {
+        return Cache::remember("pst-{$province}-current-rate", 1440, function () use ($province) {
             return Rates::where('province', $province)
                     ->where('start', '<=', Carbon::now())
                     ->orderBy('start', 'DESC')
@@ -114,7 +114,7 @@ class RatesAPIV2Controller extends Controller
      */
     public function getFuturePst($province)
     {
-        return Cache::remember('pst-future-rate', 1440, function () use ($province) {
+        return Cache::remember("pst-{$province}-future-rate", 1440, function () use ($province) {
             $rate = Rates::where('province', $province)
                     ->where('start', '>', Carbon::now())
                     ->orderBy('start', 'DESC')
