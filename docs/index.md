@@ -48,9 +48,9 @@ The attributes returned by the API are pretty standards all over. While some end
 
 #### URL to poll
 
-URL to poll the API is `http://api.canadasalestaxapi.ca`.
+URL to poll the API is `http://api.salestaxapi.ca`.
 
-For example, sending a `GET` request to `http://api.canadasalestaxapi.ca/v2/federal/gst` will retreive the currently applicable GST rate.
+For example, sending a `GET` request to `http://api.salestaxapi.ca/v2/federal/gst` will retreive the currently applicable GST rate.
 
 #### About historical rates
 
