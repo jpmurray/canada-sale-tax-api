@@ -224,7 +224,7 @@ This endpoint will return a `404: There is no known future rate for :province.` 
 		"source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
 		"updated_at": "2017-05-28 18:49:00"
 	},
-	// and so on with all provinces
+	"etc": {"and so on..."}
 }
 ```
 
