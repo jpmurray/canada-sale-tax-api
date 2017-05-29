@@ -33,6 +33,7 @@ class IncrementStats implements ShouldQueue
      */
     public function handle()
     {
+        Log::info("+1 for: {$this->endpoint}");
         $endpointStat = Stat::firstOrCreate(['endpoint' => $this->endpoint]);
         $endpointStat->increment('hits');
     }
