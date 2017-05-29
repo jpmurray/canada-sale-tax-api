@@ -62,7 +62,7 @@ class RatesAPIV2Controller extends Controller
      */
     public function getHistoricalGst()
     {
-        return Cache::remember('pst-all-rates', 1440, function () {
+        return Cache::remember('gst-all-rates', 1440, function () {
             return Rates::where('province', 'all')
                     ->orderBy('start', 'DESC')
                     ->get($this->gstFields);
