@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\IncrementStats;
 use App\Rates;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class RatesAPIV2Controller extends Controller
 {
@@ -18,6 +20,8 @@ class RatesAPIV2Controller extends Controller
         $this->gstFields = ['start', 'type', 'gst', 'applicable', 'source', 'updated_at'];
         $this->pstFields = ['start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
         $this->allPstFields = ['province', 'start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
+
+        dispatch(new IncrementStats(request()->path()));
     }
 
     /**
@@ -70,6 +74,7 @@ class RatesAPIV2Controller extends Controller
      */
     public function getAllPst()
     {
+
         return Cache::remember('pst-all-current-rate', 1440, function () {
             $all = Rates::where('province', '!=', 'all')
                     ->where('start', '<=', Carbon::now())
