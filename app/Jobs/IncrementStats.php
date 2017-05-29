@@ -43,7 +43,7 @@ class IncrementStats implements ShouldQueue
      * @param  Exception  $exception
      * @return void
      */
-    public function failed(Exception $exception)
+    public function failed(\Exception $exception)
     {
         Log::info($exception->getMessage());
     }
