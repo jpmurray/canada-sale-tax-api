@@ -44,6 +44,7 @@ The attributes returned by the API are pretty standards all over. While some end
 - `source`: a `string` value, containing the source of the information;
 - `start`: the date at which a given rate started to be used;
 - `type`: a list, separated by comma, of the type of taxes that are applicable, and used to calculate the 'applicable' attribute;
+- `incoming_changes`: either a `datetime` to point when the next known change is happening or `false` (you can hit `future` endpoint for more informations);
 - `updated_at`: a `datetime` value of the last update the information received; 
 
 #### URL to poll
@@ -73,7 +74,8 @@ This means that that this API does not strive to know every _past_ rates, but wi
 	"gst": 0.05,
 	"applicable": 0.05,
 	"source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-	"updated_at": "2017-05-28 19:03:28"
+	"updated_at": "2017-05-28 19:03:28",
+	"incoming_changes": false,
 }
 ```
 
@@ -140,7 +142,8 @@ This endpoint will return a `404: There is no known future rate for GST.` if the
 	"gst": 0.05,
 	"applicable": 0.14975,
 	"source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-	"updated_at": "2017-05-28 15:30:37"
+	"updated_at": "2017-05-28 15:30:37",
+	"incoming_changes": "2019-07-01 00:00:00",
 }
 ```
 
