@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.2.0 (2019-05-31)
+- Added `incoming_changes` value to `gst` and `:province` endpoint.
+
 ## 4.1.0 (2019-05-31)
 - Upgraded to latest Laravel version.
 

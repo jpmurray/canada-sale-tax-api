@@ -30,11 +30,25 @@ class RatesAPIV2Controller extends Controller
     public function getCurrentGst()
     {
         return Cache::remember('gst-current-rate', 1440, function () {
-            return Rates::where('province', 'all')
+            $rates = Rates::where('province', 'all')
                     ->where('start', '<=', Carbon::now())
                     ->orderBy('start', 'DESC')
                     ->get($this->gstFields)
                     ->first();
+
+            $future_rates = Rates::where('province', 'all')
+                    ->where('start', '>', Carbon::now())
+                    ->orderBy('start', 'DESC')
+                    ->get($this->gstFields)
+                    ->first();
+
+            if (is_null($future_rates)) {
+                $rates['incoming_changes'] = false;
+            } else {
+                $rates['incoming_changes'] = $future_rates->start;
+            }
+
+            return $rates;
         });
     }
 
@@ -101,11 +115,26 @@ class RatesAPIV2Controller extends Controller
     public function getCurrentPst($province)
     {
         return Cache::remember("pst-{$province}-current-rate", 1440, function () use ($province) {
-            return Rates::where('province', $province)
+            $rates = Rates::where('province', $province)
                     ->where('start', '<=', Carbon::now())
                     ->orderBy('start', 'DESC')
                     ->get($this->pstFields)
-                    ->first();
+                    ->first()
+                    ->toArray();
+        
+            $future_rates = Rates::where('province', $province)
+                        ->where('start', '>', Carbon::now())
+                        ->orderBy('start', 'DESC')
+                        ->get($this->pstFields)
+                        ->first();
+
+            if (is_null($future_rates)) {
+                $rates['incoming_changes'] = false;
+            } else {
+                $rates['incoming_changes'] = $future_rates->start;
+            }
+
+            return $rates;
         });
     }
 
