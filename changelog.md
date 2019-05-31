@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.1.0 (2019-05-31)
+- Upgraded to latest Laravel version.
+
 ## 4.0.1 (2017-05-29)
 - Fixed cache name that where overtaking themselves when querying provinces rate
 
