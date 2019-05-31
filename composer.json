@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
+        "fideloper/proxy": "^4.0",
         "predis/predis": "^1.1",
         "laracademy/interactive-make": "^1.0",
         "laravel/tinker": "^1.0"
@@ -14,7 +15,7 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~7.0",
         "filp/whoops": "~2.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*"        
@@ -40,8 +41,7 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
