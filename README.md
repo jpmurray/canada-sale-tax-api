@@ -4,6 +4,8 @@ Here's an API to get canadian sales tax informations. Simple as that.
 
 The API is now at `v2`. Please see the documentation for usage.
 
+If you see any discrepancies in actual data, missing future rates or want to contribute historical rates, please open an issue on the Github repository with the data and we'll include it in the API.
+
 ## Documentation
 
 - [v2 of the API](http://salestaxapi.ca/) 
@@ -11,7 +13,7 @@ The API is now at `v2`. Please see the documentation for usage.
 
 ### Rate limit
 
-API usage is curently rate limited at 60 tries per minutes. The rate limit is subject to change upon API popularity.
+API usage is curently rate limited at 60 hits per minutes. The rate limit is subject to change upon API popularity.
 
 ### Contributing
 
@@ -19,4 +21,4 @@ You know the drill: report bugs in issue, suggest features in issue and if you c
 
 ## License
 
-Since it's built with Laravel, we use the same license: [MIT license](http://opensource.org/licenses/MIT).
+[MIT license](http://opensource.org/licenses/MIT).
