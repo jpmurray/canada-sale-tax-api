@@ -2,9 +2,7 @@
 
 Here's an API to get canadian sales tax informations. Simple as that.
 
-## Report actual, future or historical data
-
-If you see any discrepancies in actual data, missing future rates or want to contribute historical rates, you can send an email at himself[at]jpmurray[dot]net with the data and we'll include it in the API.
+If you see any discrepancies in actual data, missing future rates or want to contribute historical rates, you can send an email at jp@utvarp.co with the data and we'll include it in the API.
 
 ## Documentation
 
