@@ -2,7 +2,7 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
-## Next
+## 4.3.0 (2019-06-01)
 - Upgraded to Laravel 5.8.
 - Changed cahce values from minutes to seconds, but still cached for one day.
 
