@@ -2,6 +2,10 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.3.0 (2019-06-01)
+- Upgraded to Laravel 5.8.
+- Changed cahce values from minutes to seconds, but still cached for one day.
+
 ## 4.2.0 (2019-05-31)
 - Added `incoming_changes` value to `gst` and `:province` endpoint.
 
