@@ -16,7 +16,7 @@ class RatesAPIV1Controller extends Controller
 
     public function getGst()
     {
-        return Cache::remember('gst-rates', 1440, function () {
+        return Cache::remember('gst-rates', 86400, function () {
             $rate = Rates::where('province', 'all')->orderBy('start', 'DESC')->first();
 
             return [
@@ -60,14 +60,14 @@ class RatesAPIV1Controller extends Controller
 
     public function getHst($province)
     {
-        return Cache::remember("hst-{$province}", 1440, function () use ($province) {
+        return Cache::remember("hst-{$province}", 86400, function () use ($province) {
             return $this->provinceRates($province, 'hst');
         });
     }
 
     public function getPst($province)
     {
-        return Cache::remember("pst-{$province}", 1440, function () use ($province) {
+        return Cache::remember("pst-{$province}", 86400, function () use ($province) {
             return $this->provinceRates($province, 'pst');
         });
     }
@@ -75,7 +75,7 @@ class RatesAPIV1Controller extends Controller
     public function getTotal($province)
     {
 
-        return Cache::remember("applicable-{$province}", 1440, function () use ($province) {
+        return Cache::remember("applicable-{$province}", 86400, function () use ($province) {
             return $this->provinceRates($province, 'applicable');
         });
     }
