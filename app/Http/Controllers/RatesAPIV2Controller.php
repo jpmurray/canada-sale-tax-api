@@ -14,9 +14,11 @@ class RatesAPIV2Controller extends Controller
 
     private $gstFields;
     private $pstFields;
+    private $provinces_codes;
 
     public function __construct()
     {
+        $this->provinces_codes = ['ab', 'bc', 'mb', 'nl', 'ns', 'nt', 'nu', 'on', 'pe', 'qc', 'sk', 'yt'];
         $this->gstFields = ['start', 'type', 'gst', 'applicable', 'source', 'updated_at'];
         $this->pstFields = ['start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
         $this->allPstFields = ['province', 'start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
@@ -114,6 +116,8 @@ class RatesAPIV2Controller extends Controller
      */
     public function getCurrentPst($province)
     {
+        $this->checkProvinceCodeValidity($province);
+        
         return Cache::remember("pst-{$province}-current-rate", 86400, function () use ($province) {
             $rates = Rates::where('province', $province)
                     ->where('start', '<=', Carbon::now())
@@ -143,6 +147,8 @@ class RatesAPIV2Controller extends Controller
      */
     public function getFuturePst($province)
     {
+        $this->checkProvinceCodeValidity($province);
+
         return Cache::remember("pst-{$province}-future-rate", 86400, function () use ($province) {
             $rate = Rates::where('province', $province)
                     ->where('start', '>', Carbon::now())
@@ -163,10 +169,23 @@ class RatesAPIV2Controller extends Controller
      */
     public function getHistoricalPst($province)
     {
+        $this->checkProvinceCodeValidity($province);
+        
         return Cache::remember("{$province}-all-rates", 86400, function () use ($province) {
             return Rates::where('province', $province)
                     ->orderBy('start', 'DESC')
                     ->get($this->pstFields);
         });
+    }
+
+    private function checkProvinceCodeValidity($code)
+    {
+        $province_code_is_valid = in_array($code, $this->provinces_codes) ? true : false;
+
+        if (!$province_code_is_valid) {
+            abort(404, 'Invalid two letter province code.');
+        }
+
+        return true;
     }
 }
