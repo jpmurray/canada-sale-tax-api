@@ -191,12 +191,12 @@ class RatesAPIV2Controller extends Controller
 
     private function incrementStats()
     {
-        dispatch(new IncrementStats(request()->path()));
+        dispatch(new IncrementStats(strtolower(request()->path())));
     }
 
     private function checkProvinceCodeValidity($code)
     {
-        $province_code_is_valid = in_array($code, $this->provinces_codes) ? true : false;
+        $province_code_is_valid = in_array((strtolower($code)), $this->provinces_codes) ? true : false;
 
         if (!$province_code_is_valid) {
             abort(404, 'Invalid two letter province code.');
