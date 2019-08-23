@@ -2,7 +2,7 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
-## Next
+## 4.5.1 (2019-08-23)
 - Fixes duplacata in stats when a user would input province codes with capitalized letters.
 
 ## 4.5.0 (2019-08-23)
