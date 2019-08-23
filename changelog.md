@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## Next
+- Added an index page at the root of api.salestaxapi.ca
+
 ## 4.4.0 (2019-06-01)
 - Removed ability to register from the frontend.
 
