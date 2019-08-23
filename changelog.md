@@ -2,7 +2,7 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
-## Next
+## 4.5.0 (2019-08-23)
 - Added an index page at the root of api.salestaxapi.ca
 - Error logging is set to daily rather than single file.
 - Added a check for province code validity in controller when needed.
