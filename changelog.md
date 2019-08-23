@@ -5,6 +5,8 @@ Trying as hard as I can to stick to semantic versionning.
 ## Next
 - Added an index page at the root of api.salestaxapi.ca
 - Error logging is set to daily rather than single file.
+- Added a check for province code validity in controller when needed.
+- Only increment API stats when request is valid.
 
 ## 4.4.0 (2019-06-01)
 - Removed ability to register from the frontend.
