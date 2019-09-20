@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.5.3 (2019-09-20)
+- Added a `FUNDING.yml` file for future possible sponsorship. I might want to add something to help cover the *really low* hosting fees so it becomes a zero sum project for @jpmurray.
+
 ## 4.5.2 (2019-09-20)
 - Fixes `nb` province code returning a 404 when querying the API. (Spotted by @bradgenereux, PR for fix by @lazluiz).
 
