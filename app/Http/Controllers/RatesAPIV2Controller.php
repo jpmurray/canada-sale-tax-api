@@ -18,7 +18,7 @@ class RatesAPIV2Controller extends Controller
 
     public function __construct()
     {
-        $this->provinces_codes = ['ab', 'bc', 'mb', 'nl', 'ns', 'nt', 'nu', 'on', 'pe', 'qc', 'sk', 'yt'];
+        $this->provinces_codes = ['ab', 'bc', 'mb', 'nb', 'nl', 'ns', 'nt', 'nu', 'on', 'pe', 'qc', 'sk', 'yt'];
         $this->gstFields = ['start', 'type', 'gst', 'applicable', 'source', 'updated_at'];
         $this->pstFields = ['start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
         $this->allPstFields = ['province', 'start', 'type', 'pst', 'hst', 'gst', 'applicable', 'source', 'updated_at'];
