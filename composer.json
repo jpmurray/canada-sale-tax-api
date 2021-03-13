@@ -6,11 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "^6.0",
         "fideloper/proxy": "^4.0",
         "predis/predis": "^1.1",
         "laracademy/interactive-make": "^1.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "laravel/helpers": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
