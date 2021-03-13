@@ -199,7 +199,7 @@ This endpoint will return a `404: There is no known future rate for :province.` 
 
 ##### Get current PST for all provinces
 
-`/v2/province/:province/all`
+`/v2/province/all`
 
 ###### Example of successfull response
 
