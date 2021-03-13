@@ -2,6 +2,9 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.7.0 (2021-03-13)
+- Added crude stats about endpoints to admin dashboard.
+
 ## 4.6.0 (2021-03-13)
 - Upgraded Laravel from 5.8 all the way to 8.0.
 - Fixed a typo in the documentation, thanks Rich !

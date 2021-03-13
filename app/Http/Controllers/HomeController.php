@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Stat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -27,7 +28,9 @@ class HomeController extends Controller
         if (Gate::denies('do-anything')) {
             abort(401, "I'm sorry Dave, I'm afraid I cannot let you do that.");
         }
-        
-        return view('home');
+
+        return view('home')->with([
+            'stats' => Stat::orderBy('hits', 'DESC')->get(),
+        ]);
     }
 }
