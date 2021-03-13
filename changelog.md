@@ -2,6 +2,10 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.6.0 (2021-03-13)
+- Upgraded Laravel from 5.8 all the way to 8.0.
+- Fixed a typo in the documentation, thanks Rich !
+
 ## 4.5.3 (2019-09-20)
 - Added a `FUNDING.yml` file for future possible sponsorship. I might want to add something to help cover the *really low* hosting fees so it becomes a zero sum project for @jpmurray.
 
