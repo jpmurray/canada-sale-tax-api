@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\File;
  */
 
 Route::group(['prefix' => '/v2'], function () {
-
     Route::group(['prefix' => '/federal'], function () {
         Route::get('/gst/historical', 'RatesAPIV2Controller@getHistoricalGst');
         Route::get('/gst/future', 'RatesAPIV2Controller@getFutureGst');
@@ -31,7 +30,6 @@ Route::group(['prefix' => '/v2'], function () {
 });
 
 Route::group(['prefix' => '/v1'], function () {
-
     Route::group(['prefix' => '/federal'], function () {
         Route::get('/gst', 'RatesAPIV1Controller@getGst');
         Route::get('/hst/{prov}', 'RatesAPIV1Controller@getHst');
