@@ -2,6 +2,10 @@
 
 Trying as hard as I can to stick to semantic versionning.
 
+## 4.8.0 (2021-03-14)
+- Reworked the crude stats collection.
+- Prune hits collection after 6 months.
+
 ## 4.7.0 (2021-03-13)
 - Added crude stats about endpoints to admin dashboard.
 
