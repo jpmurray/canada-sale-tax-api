@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\IncrementStats;
 use App\Rates;
+use App\Services\Stats;
 use Illuminate\Support\Facades\Cache;
 
 class RatesAPIV1Controller extends Controller
 {
-
     public function __construct()
     {
-        dispatch(new IncrementStats(request()->path()));
+        (new Stats())->setRequest(request())->dispatch();
     }
 
     public function getGst()
@@ -28,7 +27,7 @@ class RatesAPIV1Controller extends Controller
 
     private function provinceRates($province, $field)
     {
-        if ($province == "all") {
+        if ($province == 'all') {
             $rates = Rates::where('province', '!=', 'all')->get()->groupBy('province');
 
             $rates = $rates->map(function ($rates, $province) use ($field) {
@@ -74,7 +73,6 @@ class RatesAPIV1Controller extends Controller
 
     public function getTotal($province)
     {
-
         return Cache::remember("applicable-{$province}", 86400, function () use ($province) {
             return $this->provinceRates($province, 'applicable');
         });

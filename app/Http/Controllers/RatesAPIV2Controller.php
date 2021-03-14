@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\IncrementStats;
 use App\Rates;
+use App\Services\Stats;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Route;
 
 class RatesAPIV2Controller extends Controller
 {
-
     private $gstFields;
     private $pstFields;
     private $provinces_codes;
@@ -25,7 +22,7 @@ class RatesAPIV2Controller extends Controller
     }
 
     /**
-     * Retuns the currently applicable GST information
+     * Retuns the currently applicable GST information.
      */
     public function getCurrentGst()
     {
@@ -55,12 +52,12 @@ class RatesAPIV2Controller extends Controller
     }
 
     /**
-     * Retuns the future applicable GST information
+     * Retuns the future applicable GST information.
      */
     public function getFutureGst()
     {
-
         $this->incrementStats();
+
         return Cache::remember('gst-future-rate', 86400, function () {
             $rate = Rates::where('province', 'all')
                     ->where('start', '>', Carbon::now())
@@ -68,15 +65,15 @@ class RatesAPIV2Controller extends Controller
                     ->first();
 
             if (is_null($rate)) {
-                abort(404, "There is no known future rate for GST.");
+                abort(404, 'There is no known future rate for GST.');
             }
-            
+
             return $rate;
         });
     }
 
     /**
-     * Return all of the known GST rates, applicable or not
+     * Return all of the known GST rates, applicable or not.
      */
     public function getHistoricalGst()
     {
@@ -90,7 +87,7 @@ class RatesAPIV2Controller extends Controller
     }
 
     /**
-     * Retuns PST information for all provinces
+     * Retuns PST information for all provinces.
      */
     public function getAllPst()
     {
@@ -117,14 +114,14 @@ class RatesAPIV2Controller extends Controller
     }
 
     /**
-     * Retuns the currently applicable PST information
+     * Retuns the currently applicable PST information.
      */
     public function getCurrentPst($province)
     {
         $this->checkProvinceCodeValidity($province);
 
         $this->incrementStats();
-        
+
         return Cache::remember("pst-{$province}-current-rate", 86400, function () use ($province) {
             $rates = Rates::where('province', $province)
                     ->where('start', '<=', Carbon::now())
@@ -132,7 +129,7 @@ class RatesAPIV2Controller extends Controller
                     ->get($this->pstFields)
                     ->first()
                     ->toArray();
-        
+
             $future_rates = Rates::where('province', $province)
                         ->where('start', '>', Carbon::now())
                         ->orderBy('start', 'DESC')
@@ -150,7 +147,7 @@ class RatesAPIV2Controller extends Controller
     }
 
     /**
-     * Retuns the future applicable PST information
+     * Retuns the future applicable PST information.
      */
     public function getFuturePst($province)
     {
@@ -168,20 +165,20 @@ class RatesAPIV2Controller extends Controller
             if (is_null($rate)) {
                 abort(404, "There is no known future rate for {$province}.");
             }
-            
+
             return $rate;
         });
     }
 
     /**
-     * Return all of the known PST rates, applicable or not
+     * Return all of the known PST rates, applicable or not.
      */
     public function getHistoricalPst($province)
     {
         $this->checkProvinceCodeValidity($province);
 
         $this->incrementStats();
-        
+
         return Cache::remember("{$province}-all-rates", 86400, function () use ($province) {
             return Rates::where('province', $province)
                     ->orderBy('start', 'DESC')
@@ -191,14 +188,14 @@ class RatesAPIV2Controller extends Controller
 
     private function incrementStats()
     {
-        dispatch(new IncrementStats(strtolower(request()->path())));
+        (new Stats())->setRequest(request())->dispatch();
     }
 
     private function checkProvinceCodeValidity($code)
     {
         $province_code_is_valid = in_array((strtolower($code)), $this->provinces_codes) ? true : false;
 
-        if (!$province_code_is_valid) {
+        if (! $province_code_is_valid) {
             abort(404, 'Invalid two letter province code.');
         }
 
