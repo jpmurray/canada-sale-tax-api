@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Hit;
 use App\Jobs\IncrementStats;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class Stats
 {
@@ -11,6 +13,7 @@ class Stats
     private $endpoint;
     private $ip;
     private $user_agent;
+    private $prune_months = 6;
 
     public function __construct()
     {
@@ -33,5 +36,10 @@ class Stats
         dispatch(new IncrementStats($this->endpoint, $this->ip, $this->user_agent));
 
         return $this;
+    }
+
+    public function prune()
+    {
+        Hit::where('created_at', '<', Carbon::now()->subMonth($this->prune_months))->delete();
     }
 }
