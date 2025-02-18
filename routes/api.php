@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\RateController as V1RateController;
 use App\Http\Controllers\API\v2\RateController as V2RateController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/v3')->group(function () {
+    Route::get('/token-test', function (Request $request) {
+        return $request->user();
+    });
 })->middleware('auth:sanctum');
 
 Route::prefix('/v2')->group(function () {
