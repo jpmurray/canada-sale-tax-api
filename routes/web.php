@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RateController;
+use App\Http\Controllers\API\v1\RateController as V1RateController;
+use App\Http\Controllers\API\v2\RateController as V2RateController;
 
 Route::get('/', function () {
     return view('welcome');
