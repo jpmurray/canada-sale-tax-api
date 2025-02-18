@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
             $table->char('province', 2); // province abbreviation
-            $table->decimal('pst', 6, 3); // pst, if applicable. 5 total digits, 2 after decimal
-            $table->decimal('gst', 6, 3); // gst rate. 5 total digits, 2 after decimal
-            $table->decimal('hst', 6, 3); // hst, if applicable, 5 total digits, 2 after decimal
-            $table->decimal('applicable', 6, 3); // applicable tax rate. 5 total digits, 2 after decimal
+            $table->decimal('pst', 6, 5); // pst, if applicable. 5 total digits, 2 after decimal
+            $table->decimal('gst', 6, 5); // gst rate. 5 total digits, 2 after decimal
+            $table->decimal('hst', 6, 5); // hst, if applicable, 5 total digits, 2 after decimal
+            $table->decimal('applicable', 6, 5); // applicable tax rate. 5 total digits, 2 after decimal
             $table->string('type'); // type of applicable tax rate, comma separated list of types used for the applicable rate
             $table->datetime('start'); // when did that date start
             $table->text('source'); // What is the source of the information
