@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hits', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class)->nullable();
-            $table->verchar('version', 4);
+            $table->varchar('version', 4);
             $table->string('endpoint');
             $table->ipAddress('client')->nullable();
             $table->string('user_agent')->nullable();
