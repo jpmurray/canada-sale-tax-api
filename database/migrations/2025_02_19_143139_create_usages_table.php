@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('version');
+            $table->verchar('version', 4);
             $table->string('endpoint');
             $table->unsignedBigInteger('count')->default(0);
             $table->timestamps();
