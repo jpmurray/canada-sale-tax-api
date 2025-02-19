@@ -4,12 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\RateController as V1RateController;
 use App\Http\Controllers\API\v2\RateController as V2RateController;
+use App\Http\Controllers\API\v3\UserController;
 
-Route::prefix('/v3')->group(function () {
-    Route::get('/token-test', function (Request $request) {
-        return $request->user();
+Route::prefix('/v3')->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('/token-test', [UserController::class, 'show']);
     });
-})->middleware('auth:sanctum');
 
 Route::prefix('/v2')->group(function () {
     Route::group(['prefix' => '/federal'], function () {
