@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
-            $table->varchar('version', 4);
+            $table->string('version', 4);
             $table->string('endpoint');
             $table->unsignedBigInteger('count')->default(0);
             $table->timestamps();
