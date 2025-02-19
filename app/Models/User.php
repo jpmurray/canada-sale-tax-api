@@ -71,4 +71,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'is_admin' => 'boolean',
         ];
     }
+
+    public function hits()
+    {
+        return $this->hasMany(Hit::class);
+    }
 }
