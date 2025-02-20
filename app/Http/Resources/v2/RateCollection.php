@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\v2;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class V2RateCollection extends ResourceCollection
+class RateCollection extends ResourceCollection
 {
+    public static $wrap = null; // remove the wrapping of the data
+
     /**
      * Transform the resource collection into an array.
      *

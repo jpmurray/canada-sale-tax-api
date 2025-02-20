@@ -6,8 +6,8 @@ use App\Models\Rate;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
-use App\Http\Resources\V2RateResource;
-use App\Http\Resources\V2RateCollection;
+use App\Http\Resources\v2\RateResource;
+use App\Http\Resources\v2\RateCollection;
 
 class RateController extends Controller
 {
@@ -22,13 +22,13 @@ class RateController extends Controller
     public function getCurrentGst()
     {
         return Cache::remember('v2-gst-current-rate', 86400, function () {
-            $rates = Rate::where('province', 'all')
+            $rates = Rate::where('province', 'fe')
                 ->where('start', '<=', Carbon::now())
                 ->orderBy('start', 'DESC')
                 ->get($this->gstFields)
                 ->first();
 
-            $future_rates = Rate::where('province', 'all')
+            $future_rates = Rate::where('province', 'fe')
                 ->where('start', '>', Carbon::now())
                 ->orderBy('start', 'DESC')
                 ->get($this->gstFields)
@@ -40,7 +40,7 @@ class RateController extends Controller
                 $rates['incoming_changes'] = $future_rates->start;
             }
 
-            return new V2RateResource($rates);
+            return new RateResource($rates);
         });
     }
 
@@ -59,7 +59,7 @@ class RateController extends Controller
                 abort(404, 'There is no known future rate for GST.');
             }
 
-            return new V2RateResource($rate);
+            return new RateResource($rate);
         });
     }
 
@@ -69,11 +69,11 @@ class RateController extends Controller
     public function getHistoricalGst()
     {
         return Cache::remember('v2-gst-all-rates', 86400, function () {
-            $rates = Rate::where('province', 'all')
+            $rates = Rate::where('province', 'fe')
                 ->orderBy('start', 'DESC')
                 ->get($this->gstFields);
 
-            return new V2RateCollection($rates);
+            return new RateCollection($rates);
         });
     }
 
@@ -88,7 +88,7 @@ class RateController extends Controller
                 ->get($this->allPstFields)
                 ->groupBy('province')
                 ->map(function ($rates) {
-                    return new V2RateResource($rates->first());
+                    return new RateResource($rates->first());
                 })->toArray();
 
             ksort($all);
@@ -125,7 +125,7 @@ class RateController extends Controller
                 $rates['incoming_changes'] = $future_rates->start;
             }
 
-            return new V2RateResource($rates);
+            return new RateResource($rates);
         });
     }
 
@@ -147,7 +147,7 @@ class RateController extends Controller
                 abort(404, "There is no known future rate for {$province}.");
             }
 
-            return new V2RateResource($rate);
+            return new RateResource($rate);
         });
     }
 
