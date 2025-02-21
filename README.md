@@ -1,23 +1,32 @@
-# Canada's sale taxes API
+# Canada's Sales Taxes API
 
-Here's an API to get canadian sales tax informations. Simple as that.
+Here's an API to get Canadian sales tax information. Simple as that.
 
-The API is now at `v2`. `v3` is curently being worked on, to allow for authentication of users. It is planned to deprecate `v1` and `v2` over time when the next version is live.
+The API is now at `v3`.
 
-If you see any discrepancies in actual data, missing future rates or want to contribute historical rates, please open an issue on the Github repository with the data and we'll include it in the API.
+## Deprecation
+
+With the availability of `v3`, the following will be deprecated:
+
+Version 1 of the API will be deprecated on July 1st, 2025.
+
+Version 2 of the API will be deprecated on December 1st, 2025.
 
 ## Documentation
 
--   [v2 of the API](http://salestaxapi.ca/)
+-   [v3 of the API](http://salestaxapi.ca/)
+-   [v2 of the API](http://salestaxapi.ca/index-v2.html)
 -   [v1 of the API](http://salestaxapi.ca/index-v1.html)
 
-### Rate limit
+### Rate Limit
 
-API usage is curently rate limited at 60 hits per minutes. The rate limit is subject to change upon API popularity.
+API usage is currently rate limited to 60 hits per minute. The rate limit is subject to change upon API popularity.
 
 ### Contributing
 
-You know the drill: report bugs in issue, suggest features in issue and if you can, submit pull requests!
+If you see any discrepancies in actual data, missing future rates, or want to contribute historical rates, please open an issue on the GitHub repository with the data and we'll include it in the API.
+
+Otherwise, you know the drill: report bugs in issues, suggest features in issues, and if you can, submit pull requests!
 
 ## License
 
