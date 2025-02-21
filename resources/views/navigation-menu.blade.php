@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                        <x-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
+                            {{ __('API Tokens') }}
+                        </x-nav-link>
+                    @endif
+
                     @can('viewAny', App\Models\Rate::class)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('rates.index')" :active="request()->routeIs('rates.index')">
