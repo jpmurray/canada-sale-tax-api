@@ -48,7 +48,7 @@ Users in Québec, Canada, have rights under applicable privacy laws, including:
 -   The right to access and correct personal information.
 -   The right to request data deletion, subject to legal obligations.
 -   The right to withdraw consent where applicable.
-    Requests regarding user rights can be submitted to [jp@atomescroch.us](mailto:jp@atomescroch.us).
+    Requests regarding user rights can be submitted to [jp@salestaxapi.ca](mailto:jp@salestaxapi.ca).
 
 ## 8. Changes to This Policy
 
@@ -56,4 +56,4 @@ We may update this Privacy Policy from time to time. Continued use of the API af
 
 ## 9. Contact Information
 
-If you have any questions about this Privacy Policy, please contact us at [jp@atomescroch.us](mailto:jp@atomescroch.us).
+If you have any questions about this Privacy Policy, please contact us at [jp@salestaxapi.ca](mailto:jp@salestaxapi.ca).

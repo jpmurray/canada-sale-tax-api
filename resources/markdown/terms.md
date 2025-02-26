@@ -42,4 +42,4 @@ These Terms and Conditions are governed by the laws of Québec, Canada. Any disp
 
 ## 9. Contact Information
 
-For questions regarding these Terms and Conditions, please contact us at [jp@atomescroch.us](mailto:jp@atomescroch.us).
+For questions regarding these Terms and Conditions, please contact us at [jp@jp@salestaxapi.ca](mailto:jp@salestaxapi.ca).
