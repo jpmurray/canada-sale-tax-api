@@ -11,8 +11,8 @@ trait AddApiMeta
     {
         return [
             'meta' => [
-                'timestamp' => now()->toISOString(),
-                'version' => '3',
+                'timestamp' => now()->toJSON(),
+                'version' => 3,
                 'alerts' => Alert::where('active', true)->get(["type", "message", "created_at"]),
             ],
         ];
