@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HitController;
 use App\Http\Controllers\RateController;
+use App\Http\Controllers\UsageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,4 +19,6 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('rates', RateController::class)->except(['show', 'destroy']);
+    Route::resource('usages', UsageController::class)->only(['index']);
+    Route::resource('hits', HitController::class)->only(['index']);
 });

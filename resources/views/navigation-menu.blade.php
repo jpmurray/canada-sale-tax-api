@@ -22,6 +22,22 @@
                         </x-nav-link>
                     @endif
 
+                    @can('viewAny', App\Models\Usage::class)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('usages.index')" :active="request()->routeIs('usages.index')">
+                            {{ __('View usage') }}
+                        </x-nav-link>
+                    </div>
+                    @endcan
+
+                    @can('viewAny', App\Models\Hit::class)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('hits.index')" :active="request()->routeIs('hits.index')">
+                            {{ __('View hits') }}
+                        </x-nav-link>
+                    </div>
+                    @endcan
+
                     @can('viewAny', App\Models\Rate::class)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('rates.index')" :active="request()->routeIs('rates.index')">

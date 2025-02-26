@@ -16,4 +16,9 @@ class Usage extends Model
         'endpoint',
         'count',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
