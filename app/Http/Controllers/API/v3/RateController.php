@@ -17,6 +17,8 @@ class RateController extends Controller
      */
     public function getCurrentGst()
     {
+        request()->user()->tokenCan('read');
+
         return Cache::remember('v3-gst-current-rate', 86400, function () {
             $rates = Rate::where('province', 'fe')
                 ->where('start', '<=', Carbon::now())
@@ -43,6 +45,8 @@ class RateController extends Controller
      */
     public function getFutureGst()
     {
+        request()->user()->tokenCan('read');
+
         return Cache::remember('v3-gst-future-rate', 86400, function () {
             $rate = Rate::where('province', 'all')
                 ->where('start', '>', Carbon::now())
@@ -62,6 +66,8 @@ class RateController extends Controller
      */
     public function getHistoricalGst()
     {
+        request()->user()->tokenCan('read');
+
         return Cache::remember('v3-gst-all-rates', 86400, function () {
             $rates = Rate::where('province', 'fe')
                 ->orderBy('start', 'DESC')
@@ -76,6 +82,8 @@ class RateController extends Controller
      */
     public function getAllPst()
     {
+        request()->user()->tokenCan('read');
+
         return Cache::remember('v3-pst-all-current-rate', 86400, function () {
             $all = Rate::where('province', '!=', 'fe')
                 ->orderBy('start', 'DESC')
@@ -98,6 +106,8 @@ class RateController extends Controller
      */
     public function getCurrentPst($province)
     {
+        request()->user()->tokenCan('read');
+
         $this->checkProvinceCodeValidity($province);
 
         return Cache::remember("pst-{$province}-current-rate", 86400, function () use ($province) {
@@ -126,6 +136,8 @@ class RateController extends Controller
      */
     public function getFuturePst($province)
     {
+        request()->user()->tokenCan('read');
+
         $this->checkProvinceCodeValidity($province);
 
         return Cache::remember("pst-{$province}-future-rate", 86400, function () use ($province) {
@@ -147,6 +159,8 @@ class RateController extends Controller
      */
     public function getHistoricalPst($province)
     {
+        request()->user()->tokenCan('read');
+
         $this->checkProvinceCodeValidity($province);
 
         return Cache::remember("{$province}-all-rates", 86400, function () use ($province) {
