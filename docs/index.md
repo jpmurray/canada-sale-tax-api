@@ -24,6 +24,8 @@ You then need to send this token in the `Authorization` header when making reque
 Authorization: Bearer <token>
 ```
 
+As of 2025, the token _never_ expires.
+
 ### Rate limit
 
 API usage is currently rate limited at 60 tries per minute. The rate limit is subject to change upon API popularity.
@@ -58,13 +60,29 @@ The attributes returned by the API are pretty standard overall. While some endpo
 -   `applicable`: a `float` numeric value representing the applicable percentage on a price (normally either the value of the GST, GST+PST, or HST);
 -   `gst`: a `float` numeric value representing a GST percentage;
 -   `hst`: a `float` numeric value representing an HST percentage;
--   `province`: a [two-letter Canadian province postal abbreviation](https://en.wikipedia.org/wiki/Canadian_postal_abbreviations_for_provinces_and_territories#List_of_postal_abbreviations);
+-   `province`: a [two-letter Canadian province postal abbreviation](https://en.wikipedia.org/wiki/Canadian_postal_abbreviations_for_provinces_and_territories#List_of_postal_abbreviations) or, in case of federal level `fe`;
 -   `pst`: a `float` numeric value representing a PST percentage;
 -   `source`: a `string` value, containing the source of the information;
 -   `start`: the date at which a given rate started (or will start) to be used;
 -   `type`: a list, separated by commas, of the types of taxes that are applicable, and used to calculate the 'applicable' attribute;
 -   `incoming_changes`: either a `datetime` to point when the next known change is happening or `false` (you can hit the `future` endpoint for more information);
 -   `updated_at`: a `datetime` value of the last update the information received;
+
+##### Meta
+
+Endpoints will also return a `meta` object containing the following attributes:
+
+-   `timestamp`: a `string` representing the ISO-8601 formatted datetime of when the response was generated. This can be used to determine if the result is cached (it usually is).
+-   `version`: an `integer` representing the current version of the API.
+-   `alerts`: an array of messages intended for users. Each message, if any, is in the following format:
+
+```json
+{
+    "type": "deprecation", // could be info, warning, or deprecation
+    "message": "v0 of the API will be deprecated on 01-01-2000", // the message content
+    "created_at": "2025-02-26T14:33:02.000000Z" // the date the message was created
+}
+```
 
 #### URL to poll
 
@@ -88,13 +106,17 @@ This means that this API does not strive to know every _past_ rate, but will ret
 
 ```json
 {
+  "data": {
+    "province": "fe",
     "start": "2008-01-01 00:00:00",
     "type": "gst",
     "gst": 0.05,
     "applicable": 0.05,
-    "source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-    "updated_at": "2017-05-28 19:03:28",
+    "source": "Wikipedia (https://en.wikipedia.org/wiki/Sales_taxes_in_Canada), accessed May 31 2019.",
+    "updated_at": "2019-05-31 14:56:48",
     "incoming_changes": false
+  },
+  "meta": {...}
 }
 ```
 
@@ -108,12 +130,16 @@ This endpoint will return a `404: There is no known future rate for GST.` if the
 
 ```json
 {
+  "data": {
+    "province": "fe",
     "start": "2100-01-01 00:00:00",
     "type": "gst",
     "gst": 0.2,
     "applicable": 0.25,
     "source": "We asked the question to a weird looking 8ball.",
     "updated_at": "2017-05-28 19:03:28"
+  },
+  "meta": {...}
 }
 ```
 
@@ -124,24 +150,32 @@ This endpoint will return a `404: There is no known future rate for GST.` if the
 ###### Example of successfull response
 
 ```json
-[
+{
+  "data": [
     {
-        "start": "2008-01-01 00:00:00",
-        "type": "gst",
-        "gst": 0.05,
-        "applicable": 0.05,
-        "source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-        "updated_at": "2017-05-28 19:03:28"
+      "province": "fe",
+      "start": "2008-01-01 00:00:00",
+      "type": "gst",
+      "gst": 0.05,
+      "applicable": 0.05,
+      "source": "Wikipedia (https://en.wikipedia.org/wiki/Sales_taxes_in_Canada), accessed May 31 2019.",
+      "updated_at": "2019-05-31 14:56:48",
+      "incoming_changes": false
     },
     {
-        "start": "1990-01-01 00:00:00",
-        "type": "gst",
-        "gst": 0.01,
-        "applicable": 0.01,
-        "source": "A dusty old book.",
-        "updated_at": "2017-05-28 19:03:28"
-    }
-]
+      "province": "fe",
+      "start": "2006-07-01 00:00:00",
+      "type": "gst",
+      "gst": 0.06,
+      "applicable": 0.06,
+      "source": "Canada Open Government dataset: Goods and Services Tax / Harmonized Sales Tax (GST/HST) Rates from 1991 - 2015",
+      "updated_at": "2019-06-01 14:04:23",
+      "incoming_changes": false
+    },
+    {...}
+  ],
+  "meta": {...}
+}
 ```
 
 #### PST (Provincial tax)
@@ -154,15 +188,19 @@ This endpoint will return a `404: There is no known future rate for GST.` if the
 
 ```json
 {
-    "start": "2013-01-01 00:00:00",
-    "type": "gst,pst",
-    "pst": 0.09975,
-    "hst": 0,
+  "data": {
+    "province": "ns",
+    "start": "2008-01-01 00:00:00",
+    "type": "hst",
     "gst": 0.05,
-    "applicable": 0.14975,
-    "source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-    "updated_at": "2017-05-28 15:30:37",
-    "incoming_changes": "2019-07-01 00:00:00"
+    "pst": 0.1,
+    "hst": 0.15,
+    "applicable": 0.15,
+    "source": "Wikipedia (https://en.wikipedia.org/wiki/Sales_taxes_in_Canada), accessed May 31 2019.",
+    "updated_at": "2019-05-31 14:51:09",
+    "incoming_changes": "2025-04-01 00:00:00"
+  },
+  "meta": {...}
 }
 ```
 
@@ -176,14 +214,19 @@ This endpoint will return a `404: There is no known future rate for :province.` 
 
 ```json
 {
-    "start": "1995-11-01 00:00:00",
-    "type": "pst",
-    "pst": 0.1,
-    "hst": 0,
-    "gst": 0.0,
-    "applicable": 0.12,
-    "source": "From a secret sovereignist thinktank document.",
-    "updated_at": "2017-05-28 15:30:37"
+  "data": {
+    "province": "ns",
+    "start": "2025-04-01 00:00:00",
+    "type": "hst",
+    "gst": 0.05,
+    "pst": 0.09,
+    "hst": 0.14,
+    "applicable": 0.14,
+    "source": "https://news.novascotia.ca/en/2024/10/23/nova-scotias-hst-drop-2025",
+    "updated_at": "2025-02-16 19:16:16",
+    "incoming_changes": false
+  },
+  "meta": {...}
 }
 ```
 
@@ -194,28 +237,35 @@ This endpoint will return a `404: There is no known future rate for :province.` 
 ###### Example of successfull response
 
 ```json
-[
+{
+  "data": [
     {
-        "start": "2020-11-01 00:00:00",
-        "type": "hst",
-        "pst": 0.1,
-        "hst": 0.13,
-        "gst": 0.03,
-        "applicable": 0.13,
-        "source": "One of the government's website.",
-        "updated_at": "2017-05-28 15:30:37"
+      "province": "qc",
+      "start": "2013-01-01 00:00:00",
+      "type": "gst,pst",
+      "gst": 0.05,
+      "pst": 0.09975,
+      "applicable": 0.14975,
+      "source": "Wikipedia (https://en.wikipedia.org/wiki/Sales_taxes_in_Canada), accessed May 31 2019.",
+      "updated_at": "2019-06-01 14:39:07",
+      "incoming_changes": false
     },
     {
-        "start": "1995-11-01 00:00:00",
-        "type": "pst",
-        "pst": 0.1,
-        "hst": 0,
-        "gst": 0.0,
-        "applicable": 0.12,
-        "source": "From a secret sovereignist thinktank document.",
-        "updated_at": "2017-05-28 15:30:37"
-    }
-]
+      "province": "qc",
+      "start": "2012-01-01 00:00:00",
+      "type": "gst,pst",
+      "gst": 0.05,
+      "pst": 0.095,
+      "applicable": 0.145,
+      "source": "Revenue Quebec, on Wayback machine: https://web.archive.org/web/20130515154436/http://www.revenuquebec.ca/en/entreprise/taxes/tvq_tps/historique-taux-tps-tvq.aspx, accessed June 1 2019.",
+      "updated_at": "2019-06-01 14:36:30",
+      "incoming_changes": false
+    },
+    {...},
+    {...}
+  ],
+  "meta": {...}
+}
 ```
 
 ##### Get current PST for all provinces
@@ -226,27 +276,31 @@ This endpoint will return a `404: There is no known future rate for :province.` 
 
 ```json
 {
-	"ab": {
-		"start": "2008-01-01 00:00:00",
-		"type": "gst",
-		"pst": 0,
-		"hst": 0,
-		"gst": 0.05,
-		"applicable": 0.05,
-		"source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-		"updated_at": "2017-05-28 18:46:55"
-	},
-	"bc": {
-		"start": "2013-04-01 00:00:00",
-		"type": "gst,pst",
-		"pst": 0.07,
-		"hst": 0,
-		"gst": 0.05,
-		"applicable": 0.12,
-		"source": "Wikipedia (https:\\/\\/en.wikipedia.org\\/wiki\\/Sales_taxes_in_Canada) , accessed May 28 2017",
-		"updated_at": "2017-05-28 18:49:00"
-	},
-	"etc": {"and so on..."}
+  "data": {
+    "ab": {
+      "province": "ab",
+      "start": "2008-01-01 00:00:00",
+      "type": "gst",
+      "gst": 0.05,
+      "applicable": 0.05,
+      "source": "Wikipedia (https://en.wikipedia.org/wiki/Sales_taxes_in_Canada), accessed May 31 2019.",
+      "updated_at": "2019-05-31 14:56:53",
+      "incoming_changes": false
+    },
+    "bc": {...},
+    "mb": {...},
+    "nb": {...},
+    "nl": {...},
+    "ns": {...},
+    "nt": {...},
+    "nu": {...},
+    "on": {...},
+    "pe": {...},
+    "qc": {...},
+    "sk": {...},
+    "yt": {...}
+  },
+  "meta": {...}
 }
 ```
 
