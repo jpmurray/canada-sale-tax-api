@@ -26,7 +26,7 @@ class RateResource extends JsonResource
             "applicable" => $this->when($this->applicable, $this->applicable),
             "source" => $this->when($this->source, $this->source),
             "updated_at" => $this->when($this->updated_at, $this->updated_at->toDatetimeString()),
-            "incoming_changes" => $this->when($this->incoming_changes, $this->incoming_changes != false ? $this->incoming_changes->toDatetimeString() : false),
+            "incoming_changes" => $this->incoming_changes ? $this->incoming_changes->toDatetimeString() : false,
         ];
     }
 }
