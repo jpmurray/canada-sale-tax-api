@@ -4,11 +4,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\RateController as V1RateController;
 use App\Http\Controllers\API\v2\RateController as V2RateController;
+use App\Http\Controllers\API\v3\RateController as V3RateController;
 use App\Http\Controllers\API\v3\UserController;
 
 Route::prefix('/v3')->middleware(['auth:sanctum', 'throttle:api'])
     ->group(function () {
         Route::get('/token-test', [UserController::class, 'show']);
+
+        Route::group(['prefix' => '/federal'], function () {
+            Route::get('/gst/historical', [V3RateController::class, 'getHistoricalGst']);
+            Route::get('/gst/future', [V3RateController::class, 'getFutureGst']);
+            Route::get('/gst', [V3RateController::class, 'getCurrentGst']);
+        });
+
+        Route::group(['prefix' => '/province'], function () {
+            Route::get('/all', [V3RateController::class, 'getAllPst']);
+            Route::get('/{province}/historical', [V3RateController::class, 'getHistoricalPst']);
+            Route::get('/{province}/future', [V3RateController::class, 'getFuturePst']);
+            Route::get('/{province}', [V3RateController::class, 'getCurrentPst']);
+        });
     });
 
 Route::prefix('/v2')->middleware(['throttle:api'])
