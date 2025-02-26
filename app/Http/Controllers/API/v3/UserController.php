@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v3;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\v3\UserResource;
 
 class UserController extends Controller
 {
@@ -12,6 +13,6 @@ class UserController extends Controller
     {
         $request->user()->tokenCan('read');
 
-        return $request->user();
+        return new UserResource($request->user());
     }
 }
