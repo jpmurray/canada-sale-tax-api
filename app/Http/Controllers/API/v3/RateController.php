@@ -164,9 +164,11 @@ class RateController extends Controller
         $this->checkProvinceCodeValidity($province);
 
         return Cache::remember("{$province}-all-rates", 86400, function () use ($province) {
-            return Rate::where('province', $province)
+            $rates = Rate::where('province', $province)
                 ->orderBy('start', 'DESC')
                 ->get();
+
+            return new RateCollection($rates);
         });
     }
 
