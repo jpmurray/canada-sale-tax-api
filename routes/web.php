@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HitController;
 use App\Http\Controllers\RateController;
+use App\Http\Controllers\AlertController;
 use App\Http\Controllers\UsageController;
 
 Route::get('/', function () {
@@ -21,4 +22,5 @@ Route::middleware([
     Route::resource('rates', RateController::class)->except(['show', 'destroy']);
     Route::resource('usages', UsageController::class)->only(['index']);
     Route::resource('hits', HitController::class)->only(['index']);
+    Route::resource('alerts', AlertController::class)->only(['index', 'create', 'store', 'edit', 'update']);
 });
