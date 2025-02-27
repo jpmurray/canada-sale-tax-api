@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.31",
+        "laravel/framework": "^12",
         "laravel/horizon": "^5.30",
         "laravel/jetstream": "^5.3",
         "laravel/pulse": "^1.4",
