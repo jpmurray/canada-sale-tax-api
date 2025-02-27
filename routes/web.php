@@ -1,23 +1,26 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HitController;
+use App\Http\Controllers\RateController;
+use App\Http\Controllers\AlertController;
+use App\Http\Controllers\UsageController;
 
-Route::get('/', 'PublicController@index')->name('welcome');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Auth::routes(['register' => false]);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/{province}', 'RatesController@index')->name('rates.index');
-Route::get('/rates/create', 'RatesController@create')->name('rates.create');
-Route::post('/rates', 'RatesController@store')->name('rates.store');
-Route::get('/rates/{rate}', 'RatesController@edit')->name('rates.edit');
-Route::put('/rates/{rate}', 'RatesController@update')->name('rates.update');
+    Route::resource('rates', RateController::class)->except(['show', 'destroy']);
+    Route::resource('usages', UsageController::class)->only(['index']);
+    Route::resource('hits', HitController::class)->only(['index']);
+    Route::resource('alerts', AlertController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+});

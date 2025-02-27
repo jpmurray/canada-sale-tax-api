@@ -8,7 +8,7 @@ If you see any discrepancies in actual data, missing future rates or want to con
 
 ### Rate limit
 
-API usage is curently rate limited at 60 tries per minutes. The rate limit is subject to change upon API popularity.
+API usage is curently rate limited at 15 tries per minutes. The rate limit is subject to change upon API popularity.
 
 ### Contributing
 
@@ -16,9 +16,9 @@ You know the drill: report bugs in issue, suggest features in issue and if you c
 
 ### Meaning of accronyms
 
-- GST: Global sales tax;
-- PST: Provincial sales tax;
-- HST: Harmonized sales tax;
+-   GST: Global sales tax;
+-   PST: Provincial sales tax;
+-   HST: Harmonized sales tax;
 
 ### Usage
 
@@ -42,6 +42,7 @@ URL to poll the API is `http://api.canadasalestaxapi.ca`.
 	"last_modified":"2016-10-01"
 }
 ```
+
 #### Get current HST for a province
 
 `/v1/federal/hst/:prov`
@@ -56,6 +57,7 @@ URL to poll the API is `http://api.canadasalestaxapi.ca`.
 ```
 
 ##### Example of unsuccessful response
+
 Will return 404 when there is no HST applicable to the province.
 
 ```
@@ -72,6 +74,7 @@ Will return 404 when there is no HST applicable to the province.
 `/v1/federal/hst/all`
 
 ##### Example of successfull response
+
 If a :prov is not present in the response, it means that there is no HST applicable to :prov.
 
 ```
@@ -89,6 +92,7 @@ If a :prov is not present in the response, it means that there is no HST applica
 `/v1/provincial/pst/:prov`
 
 ##### Example of successfull response
+
 Will return a rate of `null` if there is no applicable HST for a province.
 
 ```
@@ -99,6 +103,7 @@ Will return a rate of `null` if there is no applicable HST for a province.
 ```
 
 ##### Example of unsuccessful response
+
 Will return 404 when there is no PST applicable to the province.
 
 ```
@@ -115,6 +120,7 @@ Will return 404 when there is no PST applicable to the province.
 `/v1/provincial/pst/all`
 
 ##### Example of successfull response
+
 If a :prov is not present in the response, it means that there is no HST applicable to :prov.
 
 ```
