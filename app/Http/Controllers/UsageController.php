@@ -17,7 +17,7 @@ class UsageController extends Controller
         Gate::authorize('viewAny', Usage::class);
 
         return view('usages.index', [
-            'usages' => Usage::orderBy('version', 'desc')->paginate(10),
+            'usages' => Usage::orderBy('updated_at', 'desc')->paginate(10),
         ]);
     }
 
