@@ -11,6 +11,7 @@ As we've launched the 3rd iteration of the API, we will be deprecating the older
 Version 1 of the API will be deprecated on July 1st, 2025.
 
 Version 2 of the API will be deprecated on December 1st, 2025.
+You can inspect the header returned for `x-deprecation-notice` in that regard.
 
 ## Documentation
 
@@ -31,6 +32,13 @@ As of 2025, the token _never_ expires.
 API usage is currently rate limited at 60 tries per minute. The rate limit is subject to change upon API popularity.
 
 We strongly encourage the implementation of a caching strategy on the user end: the sales tax rarely changes, and this helps with server load. Updating this cache once a month should be sufficient.
+
+You can inspect the headers returned with your request to monitor rate limits:
+
+-   `x-ratelimit-limit`: Total attempts permitted in the time period.
+-   `x-ratelimit-remaining`: Remaining attempts in the time period.
+-   `retry-after`: The number of seconds to wait before making another request after hitting the rate limit.
+-   `x-ratelimit-reset`: The timestamp indicating when the rate limit will reset.
 
 ### Contributing
 
