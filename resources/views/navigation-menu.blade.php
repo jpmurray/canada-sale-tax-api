@@ -61,6 +61,22 @@
                         </x-nav-link>
                     </div>
                     @endcan
+
+                    @can('create', App\Models\PendingRateUpdate::class)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('pending-rate-updates.create')" :active="request()->routeIs('pending-rate-updates.create')">
+                            {{ __('Propose rate update') }}
+                        </x-nav-link>
+                    </div>
+                    @endcan
+
+                    @can('viewAny', App\Models\PendingRateUpdate::class)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('pending-rate-updates.index')" :active="request()->routeIs('pending-rate-updates.*')">
+                            {{ __('Pending updates') }}
+                        </x-nav-link>
+                    </div>
+                    @endcan
                 </div>
             </div>
 

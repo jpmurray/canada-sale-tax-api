@@ -16,6 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
@@ -48,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_admin',
         'two_factor_confirmed_at',
         'profile_photo_url',
-        'id'
+        'id',
     ];
 
     /**
@@ -77,5 +78,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hits()
     {
         return $this->hasMany(Hit::class);
+    }
+
+    public function pendingRateUpdates()
+    {
+        return $this->hasMany(PendingRateUpdate::class);
     }
 }
