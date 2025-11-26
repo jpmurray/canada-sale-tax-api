@@ -83,7 +83,7 @@
                                 <div class="mb-4">
                                     <x-label for="reject_notes" :value="__('Reason for rejection (required)')" />
                                     <textarea id="reject_notes" name="review_notes" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" rows="3" required></textarea>
-                                    <x-input-error class="mt-2" :for="$errors->get('review_notes')" />
+                                    <x-input-error class="mt-2" for="review_notes" />
                                 </div>
                                 <x-button type="submit" class="bg-red-600 hover:bg-red-700">
                                     {{ __('Reject') }}

@@ -39,7 +39,7 @@
                                 <option value="YT">Yukon</option>
                             </select>
 
-                            <x-input-error class="mt-2" :for="$errors->get('province')" />
+                            <x-input-error class="mt-2" for="province" />
                         </div>
 
                         <div>
@@ -47,7 +47,7 @@
                             
                             <input type="date" id="start" name="start" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('start')" />
+                            <x-input-error class="mt-2" for="start" />
                         </div>
 
                         <div>
@@ -55,7 +55,7 @@
                             
                             <input type="number" id="pst" name="pst" step="0.00001" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('pst')" />
+                            <x-input-error class="mt-2" for="pst" />
                         </div>
 
                         <div>
@@ -63,7 +63,7 @@
                             
                             <input type="number" id="gst" name="gst" step="0.00001" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('gst')" />
+                            <x-input-error class="mt-2" for="gst" />
                         </div>
 
                         <div>
@@ -71,7 +71,7 @@
                             
                             <input type="number" id="hst" name="hst" step="0.00001" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('hst')" />
+                            <x-input-error class="mt-2" for="hst" />
                         </div>
 
                         <div>
@@ -79,15 +79,15 @@
                             
                             <input type="number" id="applicable" name="applicable" step="0.00001" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('applicable')" />
+                            <x-input-error class="mt-2" for="applicable" />
                         </div>
 
                         <div>
-                            <x-label for="type" :value="__('Types used for the type tax rate (comma separated)')" />
+                            <x-label for="type" :value="__('Type used for the applicable tax rate (comma separated)')" />
                             
                             <input type="text" id="type" name="type" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('type')" />
+                            <x-input-error class="mt-2" for="type" />
                         </div>
 
                         <div>
@@ -95,7 +95,7 @@
                             
                             <input type="text" id="source" name="source" class="mt-1 block w-full" required>
                             
-                            <x-input-error class="mt-2" :for="$errors->get('source')" />
+                            <x-input-error class="mt-2" for="source" />
                         </div>
                 
                         <div class="flex items-center gap-4">
