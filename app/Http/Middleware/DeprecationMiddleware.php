@@ -20,7 +20,7 @@ class DeprecationMiddleware
         $rate = (int) config('api.deprecation.' . $version . '.rate');
         $deprecationDate = Carbon::createFromFormat('Y-m-d', config('api.deprecation.' . $version . '.date'));
         $sunsetDate = Carbon::createFromFormat('Y-m-d', config('api.sunset.' . $version . '.date'));
-        $message = 'Version ' . $version . ' of the API will be sunsetted on ' . $sunsetDate->toRfc7231String() . '.';
+        $message = 'Version ' . $version . ' of the API will be sunsetted on ' . $sunsetDate->toRfc7231String() . '. Please read the documentation at https://salestaxapi.ca/ for more information.';
 
         if ($rate === 100) {
             return response()
