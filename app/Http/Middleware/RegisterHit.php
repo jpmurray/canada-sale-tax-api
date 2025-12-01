@@ -24,8 +24,17 @@ class RegisterHit
         $ip = $this->getIP($request);
         $user_agent = $this->getUserAgent($request);
 
-        ProcessHits::dispatch($version, $endpoint, $ip, $user_agent, $request->user());
+        try {
+            $response = $next($request);
+        } catch (\Throwable $e) {
+            app(\Illuminate\Contracts\Debug\ExceptionHandler::class)->report($e);
+            $response = app(\Illuminate\Contracts\Debug\ExceptionHandler::class)->render($request, $e);
+        }
 
-        return $next($request);
+        $statusCode = method_exists($response, 'getStatusCode') ? $response->getStatusCode() : null;
+
+        ProcessHits::dispatch($version, $endpoint, $ip, $user_agent, $request->user(), $statusCode);
+
+        return $response;
     }
 }
