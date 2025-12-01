@@ -17,17 +17,19 @@ class ProcessHits implements ShouldQueue
     private $ip;
     private $user_agent;
     private $user;
+    private $status_code;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($version, $endpoint, $ip, $user_agent, $user = null)
+    public function __construct($version, $endpoint, $ip, $user_agent, $user = null, $status_code = null)
     {
         $this->version = strtolower($version);
         $this->endpoint = strtolower($endpoint);
         $this->ip = $ip;
         $this->user_agent = $user_agent;
         $this->user = $user;
+        $this->status_code = $status_code;
     }
 
     /**
@@ -44,6 +46,7 @@ class ProcessHits implements ShouldQueue
                 'endpoint' => $this->endpoint,
                 'client' => $this->ip,
                 'user_agent' => $this->user_agent,
+                'status_code' => $this->status_code,
             ]);
         } else {
             Hit::create([
@@ -51,6 +54,7 @@ class ProcessHits implements ShouldQueue
                 'endpoint' => $this->endpoint,
                 'client' => $this->ip,
                 'user_agent' => $this->user_agent,
+                'status_code' => $this->status_code,
             ]);
         }
         // dd($this->version, $this->endpoint, $this->ip, $this->user_agent, $this->user);

@@ -16,6 +16,7 @@ class Hit extends Model
         'endpoint',
         'client',
         'user_agent',
+        'status_code',
     ];
 
     /**
