@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Usages') }}
+            {{ __('Hits') }}
         </h2>
     </x-slot>
 
@@ -29,6 +29,9 @@
                                         User agent
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-black">
+                                        Status code
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border border-black">
                                         When
                                     </th>
                                 </tr>
@@ -50,6 +53,9 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center border border-black">
                                             {{ $hit->user_agent }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center border border-black">
+                                            {{ $hit->status_code ?? '—' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center border border-black">
                                             {{ $hit->created_at->diffForHumans() }}
