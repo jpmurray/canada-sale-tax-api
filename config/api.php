@@ -23,11 +23,9 @@ return [
     'deprecation' => [
         'v1' => [
             'date' => "2025-01-01",
-            'rate' => env('DEPRECATION_RATE_V1'),
         ],
         'v2' => [
             'date' => "2025-01-01",
-            'rate' => env('DEPRECATION_RATE_V2'),
         ],
     ],
     'sunset' => [
